@@ -14,7 +14,6 @@ namespace Neo4jClient.Transactions
     /// </summary>
     internal class Neo4jTransationSinglePhaseNotification : ISinglePhaseNotification
     {
-        private static readonly Guid TransactionResourceId = new Guid("{BB792575-FAA7-4C72-A6B1-A69876CC3E1E}");
         private ITransactionExecutionEnvironment _transactionExecutionEnvironment;
 
         public Neo4jTransationSinglePhaseNotification(ITransactionExecutionEnvironment transactionExecutionEnvironment)
@@ -74,7 +73,7 @@ namespace Neo4jClient.Transactions
 
         public void Enlist(Transaction tx)
         {
-            tx.EnlistDurable(TransactionResourceId, this, EnlistmentOptions.None);
+            tx.EnlistDurable(_transactionExecutionEnvironment.ResourceManagerId, this, EnlistmentOptions.None);
         }
     }
 

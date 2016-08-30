@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Neo4jClient.Execution;
-using Neo4jClient.Serialization;
 using Newtonsoft.Json;
 
 namespace Neo4jClient.Transactions
@@ -19,6 +18,7 @@ namespace Neo4jClient.Transactions
         public IEnumerable<JsonConverter> JsonConverters { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public Guid ResourceManagerId { get; set; }
 
         public TransactionExecutionEnvironment(ExecutionConfiguration executionConfiguration)
         {
@@ -27,8 +27,8 @@ namespace Neo4jClient.Transactions
             Username = executionConfiguration.Username;
             Password = executionConfiguration.Password;
             JsonConverters = executionConfiguration.JsonConverters;
+            ResourceManagerId = executionConfiguration.ResourceManagerId;
         }
-
     }
 
     internal interface ITransactionExecutionEnvironment
@@ -40,5 +40,6 @@ namespace Neo4jClient.Transactions
         IEnumerable<JsonConverter> JsonConverters { get; set; }
         string Username { get; set; }
         string Password { get; set; }
+        Guid ResourceManagerId { get; set; }
     }
 }
